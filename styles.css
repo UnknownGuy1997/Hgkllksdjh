@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -7,301 +7,251 @@
 }
 
 :root {
-    --her-primary: #ff69b4;
-    --her-secondary: #ff1493;
-    --her-gradient: linear-gradient(135deg, #ff69b4, #ff1493);
+    --her-primary: #f4a6c2;
+    --her-secondary: #e8899e;
+    --her-soft: rgba(244, 166, 194, 0.1);
+    --her-muted: rgba(244, 166, 194, 0.05);
     
-    --him-primary: #6a0dad;
-    --him-secondary: #4b0082;
-    --him-gradient: linear-gradient(135deg, #6a0dad, #4b0082);
+    --him-primary: #9b8dc4;
+    --him-secondary: #8073a8;
+    --him-soft: rgba(155, 141, 196, 0.1);
+    --him-muted: rgba(155, 141, 196, 0.05);
     
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bg-primary: #191919;
+    --bg-secondary: #1f1f1f;
+    --bg-card: #222222;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --text-muted: #808080;
+    
+    --border-light: #333333;
+    --shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --radius-small: 8px;
+    --radius-medium: 12px;
+    --radius-large: 16px;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
     min-height: 100vh;
-    background: #191919;
-    color: white;
 }
 
-/* Animated border */
-.border-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 1;
-    border: 2px solid;
-    border-image: linear-gradient(45deg, 
-        var(--her-primary), 
-        var(--him-primary), 
-        var(--her-primary), 
-        var(--him-primary), 
-        var(--her-primary)
-    ) 1;
-    animation: borderFlow 6s linear infinite;
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-@keyframes borderFlow {
-    0% { border-image-source: linear-gradient(0deg, var(--her-primary), var(--him-primary), var(--her-primary), var(--him-primary), var(--her-primary)); }
-    25% { border-image-source: linear-gradient(90deg, var(--her-primary), var(--him-primary), var(--her-primary), var(--him-primary), var(--her-primary)); }
-    50% { border-image-source: linear-gradient(180deg, var(--her-primary), var(--him-primary), var(--her-primary), var(--him-primary), var(--her-primary)); }
-    75% { border-image-source: linear-gradient(270deg, var(--her-primary), var(--him-primary), var(--her-primary), var(--him-primary), var(--her-primary)); }
-    100% { border-image-source: linear-gradient(360deg, var(--her-primary), var(--him-primary), var(--her-primary), var(--him-primary), var(--her-primary)); }
-}
-
-/* Background particles */
-.bg-particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    background: radial-gradient(circle, var(--her-primary), transparent);
-    border-radius: 50%;
-    animation: particleFloat 8s infinite linear;
-    opacity: 0.2;
-}
-
-@keyframes particleFloat {
-    0% { 
-        transform: translateY(100vh) translateX(0) scale(0); 
-        opacity: 0; 
-    }
-    10% { 
-        opacity: 0.3; 
-    }
-    90% { 
-        opacity: 0.1; 
-    }
-    100% { 
-        transform: translateY(-100px) translateX(100px) scale(1); 
-        opacity: 0; 
-    }
-}
-
-/* Main Container */
-.main-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    position: relative;
-    z-index: 10;
-}
-
-/* Header */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards 0.3s;
+    margin-bottom: 48px;
 }
 
 .main-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--her-primary), var(--him-primary));
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    background: linear-gradient(120deg, var(--her-primary), var(--him-primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    color: #888;
+    font-size: 1rem;
+    color: var(--text-secondary);
     font-weight: 400;
 }
 
-/* Cards Container */
 .cards-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    width: 100%;
+    gap: 32px;
+    margin-bottom: 40px;
 }
 
-/* Individual Cards */
 .person-card {
-    background: rgba(25, 25, 25, 0.95);
-    border-radius: 24px;
-    padding: 3rem 2rem;
-    backdrop-filter: blur(20px);
-    border: 1px solid;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateY(30px);
+    background: var(--bg-card);
+    border-radius: var(--radius-large);
+    padding: 32px 24px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-light);
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
 }
 
-.person-card:nth-child(1) { 
-    animation: fadeInUp 0.8s ease forwards 0.6s;
+.person-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.person-card.her-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(244, 166, 194, 0.08) 100%);
+    border-color: rgba(244, 166, 194, 0.2);
+}
+
+.person-card.him-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(155, 141, 196, 0.08) 100%);
+    border-color: rgba(155, 141, 196, 0.2);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.person-avatar {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.person-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.person-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.cute-button {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-medium);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    font-family: inherit;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cute-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.her-card .cute-button:hover {
     border-color: var(--her-primary);
-    box-shadow: 0 25px 50px rgba(255, 105, 180, 0.1);
+    background: var(--her-soft);
 }
 
-.person-card:nth-child(2) { 
-    animation: fadeInUp 0.8s ease forwards 0.8s;
+.him-card .cute-button:hover {
     border-color: var(--him-primary);
-    box-shadow: 0 25px 50px rgba(106, 13, 173, 0.1);
+    background: var(--him-soft);
 }
 
-.person-card::before {
+.button-icon {
+    font-size: 1.25rem;
+}
+
+.button-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.hug-button {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--her-primary), var(--her-secondary));
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hug-button::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--her-gradient);
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        rgba(255, 255, 255, 0.05)
+    );
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.person-card:nth-child(2)::before {
-    background: var(--him-gradient);
-}
-
-.person-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
-}
-
-.person-card:nth-child(1):hover {
-    box-shadow: 0 35px 70px rgba(255, 105, 180, 0.2);
-}
-
-.person-card:nth-child(2):hover {
-    box-shadow: 0 35px 70px rgba(106, 13, 173, 0.2);
-}
-
-/* Card Headers */
-.card-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-.person-avatar {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.person-name {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.person-card:nth-child(1) .person-name {
-    color: var(--her-primary);
-}
-
-.person-card:nth-child(2) .person-name {
-    color: var(--him-primary);
-}
-
-.person-subtitle {
-    color: #888;
-    font-size: 1rem;
-}
-
-/* Buttons */
-.buttons-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.cute-button {
-    padding: 20px 16px;
-    background: rgba(15, 15, 15, 0.9);
-    color: white;
-    border: 1px solid;
-    border-radius: 16px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    backdrop-filter: blur(20px);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-}
-
-.person-card:nth-child(1) .cute-button {
-    border-color: var(--her-primary);
-}
-
-.person-card:nth-child(2) .cute-button {
-    border-color: var(--him-primary);
-}
-
-.cute-button:hover {
-    transform: translateY(-4px);
-    background: rgba(25, 25, 25, 0.95);
-}
-
-.person-card:nth-child(1) .cute-button:hover {
-    border-color: var(--her-primary);
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
-}
-
-.person-card:nth-child(2) .cute-button:hover {
-    border-color: var(--him-primary);
-    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.3);
-}
-
-.button-icon {
-    font-size: 1.5rem;
-}
-
-.button-text {
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    font-size: 0.85rem;
-}
-
-/* Special Hug Button */
-.hug-button {
-    grid-column: 1 / -1;
-    background: var(--her-gradient);
-    border: none;
-    color: white;
-    font-weight: 600;
-}
-
-.person-card:nth-child(2) .hug-button {
-    background: var(--him-gradient);
+.him-card .hug-button {
+    background: linear-gradient(135deg, var(--him-primary), var(--him-secondary));
 }
 
 .hug-button:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-.person-card:nth-child(2) .hug-button:hover {
-    box-shadow: 0 15px 40px rgba(106, 13, 173, 0.4);
+.hug-button:hover::before {
+    opacity: 1;
+}
+
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-heart {
+    position: absolute;
+    opacity: 0.6;
+    animation: floatUp 8s infinite linear;
+    font-size: 14px;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Fact Modal */
@@ -320,7 +270,7 @@ body {
 }
 
 .fact-content {
-    background: rgba(5, 5, 5, 0.98);
+    background: rgba(34, 34, 34, 0.98);
     padding: 3rem;
     border-radius: 20px;
     max-width: 600px;
@@ -328,13 +278,13 @@ body {
     text-align: center;
     backdrop-filter: blur(30px);
     border: 1px solid var(--her-primary);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 50px var(--her-primary);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 50px rgba(244, 166, 194, 0.3);
     animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fact-content.him-fact {
     border-color: var(--him-primary);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 50px var(--him-primary);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 50px rgba(155, 141, 196, 0.3);
 }
 
 @keyframes modalSlideIn {
@@ -369,28 +319,28 @@ body {
 
 .close-btn {
     padding: 12px 28px;
-    background: var(--her-gradient);
+    background: linear-gradient(135deg, var(--her-primary), var(--her-secondary));
     color: white;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
-    transition: var(--transition);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: 'Inter', sans-serif;
 }
 
 .close-btn.him-btn {
-    background: var(--him-gradient);
+    background: linear-gradient(135deg, var(--him-primary), var(--him-secondary));
 }
 
 .close-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 25px var(--her-primary);
+    box-shadow: 0 8px 25px rgba(244, 166, 194, 0.4);
 }
 
 .close-btn.him-btn:hover {
-    box-shadow: 0 8px 25px var(--him-primary);
+    box-shadow: 0 8px 25px rgba(155, 141, 196, 0.4);
 }
 
 /* Virtual Hug Styles */
@@ -400,7 +350,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 105, 180, 0.1);
+    background: rgba(244, 166, 194, 0.1);
     backdrop-filter: blur(5px);
     z-index: 150;
     display: none;
@@ -416,7 +366,7 @@ body {
 }
 
 .hug-overlay.him-hug {
-    background: rgba(106, 13, 173, 0.1);
+    background: rgba(155, 141, 196, 0.1);
 }
 
 .hug-overlay.him-hug.active {
@@ -425,23 +375,23 @@ body {
 
 @keyframes hugPulse {
     0%, 100% {
-        background: rgba(255, 105, 180, 0.1);
-        box-shadow: inset 0 0 50px rgba(255, 105, 180, 0.1);
+        background: rgba(244, 166, 194, 0.1);
+        box-shadow: inset 0 0 50px rgba(244, 166, 194, 0.1);
     }
     50% {
-        background: rgba(255, 105, 180, 0.2);
-        box-shadow: inset 0 0 100px rgba(255, 105, 180, 0.3);
+        background: rgba(244, 166, 194, 0.2);
+        box-shadow: inset 0 0 100px rgba(244, 166, 194, 0.3);
     }
 }
 
 @keyframes hugPulsePurple {
     0%, 100% {
-        background: rgba(106, 13, 173, 0.1);
-        box-shadow: inset 0 0 50px rgba(106, 13, 173, 0.1);
+        background: rgba(155, 141, 196, 0.1);
+        box-shadow: inset 0 0 50px rgba(155, 141, 196, 0.1);
     }
     50% {
-        background: rgba(106, 13, 173, 0.2);
-        box-shadow: inset 0 0 100px rgba(106, 13, 173, 0.3);
+        background: rgba(155, 141, 196, 0.2);
+        box-shadow: inset 0 0 100px rgba(155, 141, 196, 0.3);
     }
 }
 
@@ -487,14 +437,14 @@ body {
 .hug-progress-bar {
     width: 0%;
     height: 100%;
-    background: var(--her-gradient);
+    background: linear-gradient(135deg, var(--her-primary), var(--her-secondary));
     background-size: 200% 100%;
     border-radius: 10px;
     animation: progressShimmer 2s ease-in-out infinite;
 }
 
 .hug-progress-bar.him-bar {
-    background: var(--him-gradient);
+    background: linear-gradient(135deg, var(--him-primary), var(--him-secondary));
 }
 
 @keyframes progressShimmer {
@@ -543,17 +493,6 @@ body {
     }
 }
 
-@keyframes fadeInUp {
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-    from { 
-        opacity: 0; 
-        transform: translateY(30px); 
-    }
-}
-
 .fact-image {
     width: 100%;
     max-width: 300px;
@@ -562,67 +501,52 @@ body {
     border-radius: 12px;
     margin: 1rem 0;
     border: 2px solid var(--her-primary);
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
-    transition: var(--transition);
+    box-shadow: 0 10px 30px rgba(244, 166, 194, 0.2);
+    transition: all 0.3s ease;
 }
 
 .fact-image.him-image {
     border-color: var(--him-primary);
-    box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+    box-shadow: 0 10px 30px rgba(155, 141, 196, 0.2);
 }
 
 .fact-image:hover {
     transform: scale(1.02);
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 15px 40px rgba(244, 166, 194, 0.3);
 }
 
 .fact-image.him-image:hover {
-    box-shadow: 0 15px 40px rgba(106, 13, 173, 0.3);
+    box-shadow: 0 15px 40px rgba(155, 141, 196, 0.3);
 }
 
-/* Responsive image sizing */
-@media (max-width: 480px) {
-    .fact-image {
-        max-width: 250px;
-        height: 150px;
-    }
-}
-
-/* Media Queries */
-@media (max-width: 968px) {
+/* Responsive */
+@media (max-width: 768px) {
     .cards-container {
         grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-    }
-
-    .person-card {
-        padding: 2rem 1.5rem;
-    }
-
-    .buttons-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hug-button {
-        grid-column: 1;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-container {
-        padding: 1rem;
+        gap: 24px;
     }
 
     .main-title {
         font-size: 2rem;
     }
 
-    .person-name {
-        font-size: 1.5rem;
+    .person-card {
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-row {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 24px 16px;
+    }
+
+    .fact-image {
+        max-width: 250px;
+        height: 150px;
     }
 
     .hug-message {
