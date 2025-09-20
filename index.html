@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для моей любимой ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="border-animation"></div>
+    <div class="bg-particles"></div>
+    <div class="hearts"></div>
+    <div class="burst-overlay" id="burstOverlay"></div>
+
+    <!-- Moon Toggle Button -->
+    <button class="moon-toggle" id="moonToggle" onclick="toggleMode()">
+        🌙
+    </button>
+
+    <!-- Password Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-container">
+            <h1 class="password-title">Доступ разрешён</h1>
+            <p class="password-subtitle">Введите секретный ключ для разблокировки</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="привет на кошачьем языке">
+            <button class="password-btn" onclick="checkPassword()">Разблокировать</button>
+            <div class="error-message" id="errorMessage">Доступ запрещён. Попробуйте снова. :c</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+        
+        <div class="content-overlay">
+            <h1 class="welcome-title">Добро пожаловать в наше пространство</h1>
+            
+            <div class="buttons-container">
+                <a href="#" class="cute-button" onclick="openNotionDiary()">
+                    <div class="button-icon">📖</div>
+                    <div class="button-text">Наш дневник</div>
+                </a>
+                
+                <a href="#" class="cute-button" onclick="sendVirtualHug()">
+                    <div class="button-icon">🤗</div>
+                    <div class="button-text">Виртуальные объятия</div>
+                </a>
+                
+                <button class="cute-button" onclick="showRandomFact()">
+                    <div class="button-icon">💕</div>
+                    <div class="button-text">Случайный факт</div>
+                </button>
+            </div>
+            
+            <!-- Virtual Hug Elements -->
+            <div class="hug-overlay" id="hugOverlay">
+                <div class="hug-message" id="hugMessage">Отправляю виртуальные объятия..</div>
+                <div class="hug-progress-container" id="hugProgressContainer">
+                    <div class="hug-progress-bar" id="hugProgressBar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fact Modal -->
+    <div class="fact-modal" id="factModal">
+        <div class="fact-content">
+            <h2 class="fact-title">Я люблю тебя потому что:</h2>
+            <p class="fact-text" id="factText"></p>
+            <button class="close-btn" onclick="closeFact()">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
