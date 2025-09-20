@@ -7,15 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="border-animation"></div>
-    <div class="bg-particles"></div>
-    <div class="hearts"></div>
-    <div class="burst-overlay" id="burstOverlay"></div>
-
-    <!-- Moon Toggle Button -->
-
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
     <!-- Main Container -->
-    <div class="main-container">
+    <div class="container">
         <!-- Header -->
         <div class="header">
             <h1 class="main-title">Для нас двоих</h1>
@@ -25,23 +20,25 @@
         <!-- Cards Container -->
         <div class="cards-container">
             <!-- For Her Card -->
-            <div class="person-card">
+            <div class="person-card her-card">
                 <div class="card-header">
                     <span class="person-avatar">😻</span>
                     <h2 class="person-name">Для неё</h2>
                     <p class="person-subtitle">Моей любимой Оле</p>
                 </div>
 
-                <div class="buttons-grid">
-                    <button class="cute-button" onclick="showRandomFact('her')">
-                        <div class="button-icon">💕</div>
-                        <div class="button-text">Случайный факт</div>
-                    </button>
+                <div class="buttons-container">
+                    <div class="button-row">
+                        <button class="cute-button" onclick="showRandomFact('her')">
+                            <div class="button-icon">💕</div>
+                            <div class="button-text">Случайный факт</div>
+                        </button>
 
-                    <button class="cute-button" onclick="placeholder('her')">
-                        <div class="button-icon">✨</div>
-                        <div class="button-text">Скоро будет</div>
-                    </button>
+                        <button class="cute-button" onclick="placeholder('her')">
+                            <div class="button-icon">✨</div>
+                            <div class="button-text">Скоро будет</div>
+                        </button>
+                    </div>
 
                     <button class="cute-button hug-button" onclick="sendVirtualHug('her')">
                         <div class="button-icon">🤗</div>
@@ -51,23 +48,25 @@
             </div>
 
             <!-- For Him Card -->
-            <div class="person-card">
+            <div class="person-card him-card">
                 <div class="card-header">
                     <span class="person-avatar">😽</span>
                     <h2 class="person-name">Для него</h2>
                     <p class="person-subtitle">Моему дорогому котёночку</p>
                 </div>
 
-                <div class="buttons-grid">
-                    <button class="cute-button" onclick="showRandomFact('him')">
-                        <div class="button-icon">💙</div>
-                        <div class="button-text">Случайный факт</div>
-                    </button>
+                <div class="buttons-container">
+                    <div class="button-row">
+                        <button class="cute-button" onclick="showRandomFact('him')">
+                            <div class="button-icon">💙</div>
+                            <div class="button-text">Случайный факт</div>
+                        </button>
 
-                    <button class="cute-button" onclick="placeholder('him')">
-                        <div class="button-icon">✨</div>
-                        <div class="button-text">Скоро будет</div>
-                    </button>
+                        <button class="cute-button" onclick="placeholder('him')">
+                            <div class="button-icon">✨</div>
+                            <div class="button-text">Скоро будет</div>
+                        </button>
+                    </div>
 
                     <button class="cute-button hug-button" onclick="sendVirtualHug('him')">
                         <div class="button-icon">🤗</div>
