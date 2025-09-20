@@ -1,9 +1,5 @@
-const PASSWORD = 'mremri';
-let currentMode = 'heart'; // 'heart' or 'star'
-let isTransitioning = false;
-
-// Random facts
-const facts = [
+// Facts for her
+const herFacts = [
     "твой смех и твой голос останавливают время вокруг меня и каждый раз заставляют моё сердце пропустить удар",
     "каждый «котёночек», каждое нежное прозвище, которое ты мне даёшь, — как сокровище, которое я хочу хранить вечно",
     "у тебя удивительная способность делать даже самые простые моменты волшебными просто своим присутствием",
@@ -37,273 +33,128 @@ const facts = [
     "каждый день с тобой — как начало чего-то прекрасного и бесконечного"
 ];
 
-function toggleMode() {
-    if (isTransitioning) return;
+// Facts for him
+const himFacts = [
+    "test",
+    "test1",
+    "test2",
+    "test3",
+    "test4",
+    "test5",
+    "test6",
+    "test7",
+    "test8",
+    "test9",
+    "test10",
+    "test11",
+    "test12",
+	"test13",
+	"test14"
+];
+
+// Picture arrays - add your image filenames here
+const herPictures = [
+    'her1.jpg',
+    'her2.jpg', 
+    'her3.jpg',
+    'her4.jpg',
+    'her5.jpg'
+    // Add more filenames as needed
+];
+
+const himPictures = [
+    'him1.jpg',
+    'him2.jpg',
+    'him3.jpg', 
+    'him4.jpg',
+    'him5.jpg'
+    // Add more filenames as needed
+];
+
+// Global variables
+let currentHugPerson = null;
+let currentFactPerson = null;
+
+// Show random fact function
+function showRandomFact(person) {
+    currentFactPerson = person;
+    const facts = person === 'her' ? herFacts : himFacts;
+    const pictures = person === 'her' ? herPictures : himPictures;
     
-    isTransitioning = true;
-    const moonToggle = document.getElementById('moonToggle');
+    const randomFact = facts[Math.floor(Math.random() * facts.length)];
+    const randomPicture = pictures[Math.floor(Math.random() * pictures.length)];
     
-    // Create burst effect
-    createBurstEffect();
+    const factModal = document.getElementById('factModal');
+    const factContent = factModal.querySelector('.fact-content');
+    const factTitle = document.getElementById('factTitle');
+    const factText = document.getElementById('factText');
+    const closeBtn = factModal.querySelector('.close-btn');
     
-    // Toggle mode
-    currentMode = currentMode === 'heart' ? 'star' : 'heart';
+    // Get or create image element
+    let factImage = document.getElementById('factImage');
+    if (!factImage) {
+        factImage = document.createElement('img');
+        factImage.id = 'factImage';
+        factImage.className = 'fact-image';
+        // Insert image after title but before text
+        factContent.insertBefore(factImage, factText);
+    }
     
-    // Update moon button
-    moonToggle.textContent = currentMode === 'heart' ? '🌙' : '⭐';
+    // Set content
+    factText.textContent = randomFact;
+    factImage.src = `pictures/${randomPicture}`;
+    factImage.alt = `Picture for ${person}`;
     
-   // Apply theme
-setTimeout(() => {
-    document.body.setAttribute('data-theme', currentMode);
-    
- // Toggle video background blur - force immediate change
-const videoBackground = document.querySelector('.video-background');
-if (videoBackground) {
-    if (currentMode === 'star') {
-        // Completely override all CSS with direct style
-        videoBackground.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            transform: translate(-50%, -50%);
-            filter: brightness(0.8);
-            z-index: 1;
-            transition: filter 0.8s ease;
-        `;
+    // Apply theming based on person
+    if (person === 'her') {
+        factTitle.textContent = 'Я люблю тебя потому что:';
+        factContent.classList.remove('him-fact');
+        factTitle.classList.remove('him-title');
+        closeBtn.classList.remove('him-btn');
+        factImage.classList.remove('him-image');
     } else {
-        // Reset to blurred state
-        videoBackground.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            transform: translate(-50%, -50%);
-            filter: blur(4px) brightness(0.6);
-            z-index: 1;
-            transition: filter 0.8s ease;
-        `;
-    }
-}
-    
-    // Clear existing particles and recreate appropriate ones
-    clearParticles();
-    setTimeout(() => {
-        if (currentMode === 'star') {
-            createStarfield();
-            createShootingStars();
-        } else {
-            createHearts();
-            createParticles();
-        }
-        isTransitioning = false;
-    }, 500);
-}, 400);
-}
-
-function createBurstEffect() {
-    const burstOverlay = document.getElementById('burstOverlay');
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    
-    burstOverlay.style.opacity = '1';
-    
-    // Create burst particles
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'burst-particle';
-        
-        const size = Math.random() * 8 + 4;
-        const randomX = (Math.random() - 0.5) * 800;
-        const randomY = (Math.random() - 0.5) * 800;
-        
-        particle.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            left: ${centerX}px;
-            top: ${centerY}px;
-            background: ${currentMode === 'heart' ? '#ff69b4' : '#6a0dad'};
-            --random-x: ${randomX}px;
-            --random-y: ${randomY}px;
-            animation: burstParticle 1s ease-out forwards;
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 10px ${currentMode === 'heart' ? '#ff69b4' : '#6a0dad'};
-        `;
-        
-        burstOverlay.appendChild(particle);
-        
-        setTimeout(() => {
-            particle.remove();
-        }, 1000);
+        factTitle.textContent = 'Ты особенная потому что:';
+        factContent.classList.add('him-fact');
+        factTitle.classList.add('him-title');
+        closeBtn.classList.add('him-btn');
+        factImage.classList.add('him-image');
     }
     
-    // Create stardust swirl effect FUCKING BROKE IT AGAIN I CANT
-    setTimeout(() => {
-        for (let i = 0; i < 20; i++) {
-            const star = document.createElement('div');
-            star.textContent = currentMode === 'heart' ? '💫' : '✨';
-            
-            const randomX = Math.random() * window.innerWidth;
-            const randomY = Math.random() * window.innerHeight;
-            
-            star.style.cssText = `
-                position: absolute;
-                left: ${randomX}px;
-                top: ${randomY}px;
-                font-size: ${Math.random() * 20 + 10}px;
-                color: ${currentMode === 'heart' ? '#ff69b4' : '#6a0dad'};
-                animation: stardustSwirl 1.5s ease-out forwards;
-                text-shadow: 0 0 10px ${currentMode === 'heart' ? '#ff69b4' : '#6a0dad'};
-                pointer-events: none;
-            `;
-            
-            burstOverlay.appendChild(star);
-            
-            setTimeout(() => {
-                star.remove();
-            }, 1500);
-        }
-    }, 300);
-    
-    setTimeout(() => {
-        burstOverlay.style.opacity = '0';
-    }, 1500);
+    // Show modal
+    factModal.style.display = 'flex';
 }
 
-function clearParticles() {
-    // Clear hearts
-    const hearts = document.querySelectorAll('.heart');
-    hearts.forEach(heart => heart.remove());
-    
-    // Clear particles
-    const particles = document.querySelectorAll('.particle');
-    particles.forEach(particle => particle.remove());
-    
-    // Clear stars
-    const stars = document.querySelectorAll('.star-particle');
-    stars.forEach(star => star.remove());
-    
-    // Clear shooting stars IN THEORY?
-    const shootingStars = document.querySelectorAll('.shooting-star');
-    shootingStars.forEach(star => star.remove());
+// Close fact modal
+function closeFact() {
+    document.getElementById('factModal').style.display = 'none';
+    currentFactPerson = null;
 }
 
-function createStarfield() {
-    const particlesContainer = document.querySelector('.bg-particles');
-    
-    function createStar() {
-        const star = document.createElement('div');
-        star.className = 'star-particle';
-        
-        const starTypes = ['⭐', '✨', '🌟', '💫', '⭐'];
-        star.innerHTML = starTypes[Math.floor(Math.random() * starTypes.length)];
-        
-        star.style.left = Math.random() * 100 + '%';
-        star.style.fontSize = (Math.random() * 15 + 10) + 'px';
-        star.style.animationDuration = (Math.random() * 6 + 8) + 's';
-        star.style.animationDelay = Math.random() * 4 + 's';
-        
-        particlesContainer.appendChild(star);
-
-        setTimeout(() => {
-            star.remove();
-        }, 12000);
-    }
-
-    // Create stars periodically
-    const starInterval = setInterval(() => {
-        if (currentMode === 'star') {
-            createStar();
-        } else {
-            clearInterval(starInterval);
-        }
-    }, 1200);
-    
-    // Create initial stars
-    for(let i = 0; i < 5; i++) {
-        setTimeout(createStar, i * 300);
-    }
-}
-
-function createShootingStars() {
-    function createShootingStar() {
-        const star = document.createElement('div');
-        star.className = 'shooting-star';
-        
-        star.style.left = Math.random() * 50 + '%';
-        star.style.top = Math.random() * 50 + '%';
-        star.style.animationDelay = Math.random() * 2 + 's';
-        
-        document.querySelector('.bg-particles').appendChild(star);
-
-        setTimeout(() => {
-            star.remove();
-        }, 3000);
-    }
-
-    // Create shooting stars occasionally
-    const shootingInterval = setInterval(() => {
-        if (currentMode === 'star' && Math.random() < 0.3) {
-            createShootingStar();
-        } else if (currentMode !== 'star') {
-            clearInterval(shootingInterval);
-        }
-    }, 4000);
-}
-
-function checkPassword() {
-    const input = document.getElementById('passwordInput');
-    const errorMsg = document.getElementById('errorMessage');
-    
-    if (input.value.toLowerCase() === PASSWORD.toLowerCase()) {
-        // Correct password
-        document.getElementById('passwordScreen').style.transform = 'translateY(-100%)';
-        document.getElementById('passwordScreen').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('passwordScreen').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('mainContent').style.opacity = '1';
-            }, 100);
-        }, 800);
-        createHearts();
-        createParticles();
-    } else {
-        // Wrong password
-        errorMsg.classList.add('show');
-        input.style.animation = 'shake 0.6s ease-in-out';
-        input.style.borderColor = '#ff4444';
-        setTimeout(() => {
-            errorMsg.classList.remove('show');
-            input.style.animation = '';
-            input.style.borderColor = 'var(--primary-color)';
-        }, 3000);
-    }
-}
-
-// Allow Enter key to submit password
-document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        checkPassword();
-    }
-});
-
-function openNotionDiary() {
-    // huehuehue
-    window.open('https://www.notion.so/Our-Little-World-1e870844216380aeab96c66cd335819e', '_blank');
-}
-
-function sendVirtualHug() {
+// Send virtual hug function
+function sendVirtualHug(person) {
+    currentHugPerson = person;
     const hugOverlay = document.getElementById('hugOverlay');
     const hugMessage = document.getElementById('hugMessage');
     const hugProgressBar = document.getElementById('hugProgressBar');
+    const hugProgressContainer = document.getElementById('hugProgressContainer');
+    
+    // Apply theming based on person
+    if (person === 'her') {
+        hugOverlay.classList.remove('him-hug');
+        hugMessage.classList.remove('him-message');
+        hugProgressContainer.classList.remove('him-progress');
+        hugProgressBar.classList.remove('him-bar');
+        hugMessage.textContent = 'Отправляю виртуальные объятия...';
+    } else {
+        hugOverlay.classList.add('him-hug');
+        hugMessage.classList.add('him-message');
+        hugProgressContainer.classList.add('him-progress');
+        hugProgressBar.classList.add('him-bar');
+        hugMessage.textContent = 'Отправляю виртуальные объятия...';
+    }
     
     // Show the hug overlay
     hugOverlay.classList.add('active');
-    hugMessage.textContent = 'Отправляю виртуальные объятия...';
     hugProgressBar.style.width = '0%';
     
     // Animate progress bar
@@ -316,10 +167,20 @@ function sendVirtualHug() {
             clearInterval(progressInterval);
             
             // Change message and stop pulsing
-            hugMessage.textContent = currentMode === 'heart' ? 'Объятие отправлено! 💕' : 'Космическое объятие отправлено! ✨';
+            hugMessage.textContent = person === 'her' ? 
+                'Объятие отправлено! 💕' : 
+                'Космическое объятие отправлено! 💜';
             hugOverlay.style.animation = 'none';
-            hugOverlay.style.background = currentMode === 'heart' ? 
-                'rgba(255, 105, 180, 0.3)' : 'rgba(106, 13, 173, 0.3)';
+            
+            // Set completion background
+            if (person === 'her') {
+                hugOverlay.style.background = 'rgba(255, 105, 180, 0.3)';
+            } else {
+                hugOverlay.style.background = 'rgba(106, 13, 173, 0.3)';
+            }
+            
+            // Create completion hearts/stars
+            createHugParticles(person);
             
             // Fade out after 2 seconds
             setTimeout(() => {
@@ -328,29 +189,64 @@ function sendVirtualHug() {
                     hugOverlay.classList.remove('active', 'hug-complete');
                     hugOverlay.style.animation = '';
                     hugOverlay.style.background = '';
+                    currentHugPerson = null;
                 }, 1000);
             }, 2000);
         }
     }, 100);
 }
 
-function showRandomFact() {
-    const randomFact = facts[Math.floor(Math.random() * facts.length)];
-    document.getElementById('factText').textContent = randomFact;
-    document.getElementById('factModal').style.display = 'flex';
+// Create particles for hug completion
+function createHugParticles(person) {
+    const heartsContainer = document.querySelector('.hearts');
+    const particleCount = 8;
+    
+    for (let i = 0; i < particleCount; i++) {
+        setTimeout(() => {
+            const particle = document.createElement('div');
+            particle.className = 'heart';
+            
+            if (person === 'her') {
+                particle.innerHTML = '💕';
+            } else {
+                particle.innerHTML = '💜';
+                particle.classList.add('purple-heart');
+            }
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.fontSize = (Math.random() * 15 + 20) + 'px';
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            heartsContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 7000);
+        }, i * 200);
+    }
 }
 
-function closeFact() {
-    document.getElementById('factModal').style.display = 'none';
+// Placeholder function for future features
+function placeholder(person) {
+    alert(`Скоро здесь будет что-то особенное для ${person === 'her' ? 'неё' : 'него'}! ✨`);
 }
 
+// Create background hearts
 function createHearts() {
     const heartsContainer = document.querySelector('.hearts');
     
     function createHeart() {
         const heart = document.createElement('div');
         heart.className = 'heart';
-        heart.innerHTML = '💕';
+        
+        // Randomly choose pink or purple hearts
+        if (Math.random() > 0.5) {
+            heart.innerHTML = '💕';
+        } else {
+            heart.innerHTML = '💜';
+            heart.classList.add('purple-heart');
+        }
+        
         heart.style.left = Math.random() * 100 + '%';
         heart.style.animationDuration = (Math.random() * 3 + 7) + 's';
         heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
@@ -361,21 +257,16 @@ function createHearts() {
         }, 10000);
     }
 
-    // Create hearts more frequently
-    const heartInterval = setInterval(() => {
-        if (currentMode === 'heart') {
-            createHeart();
-        } else {
-            clearInterval(heartInterval);
-        }
-    }, 1500);
+    // Create hearts periodically
+    const heartInterval = setInterval(createHeart, 2000);
     
     // Create initial hearts immediately
     for(let i = 0; i < 3; i++) {
-        setTimeout(createHeart, i * 500);
+        setTimeout(createHeart, i * 600);
     }
 }
 
+// Create background particles
 function createParticles() {
     const particlesContainer = document.querySelector('.bg-particles');
     
@@ -390,17 +281,16 @@ function createParticles() {
 
         setTimeout(() => {
             particle.remove();
-        }, 10000);
+        }, 12000);
     }
 
     // Create particles periodically
-    const particleInterval = setInterval(() => {
-        if (currentMode === 'heart') {
-            createParticle();
-        } else {
-            clearInterval(particleInterval);
-        }
-    }, 1000);
+    const particleInterval = setInterval(createParticle, 1500);
+    
+    // Create initial particles
+    for(let i = 0; i < 5; i++) {
+        setTimeout(createParticle, i * 300);
+    }
 }
 
 // Close modal when clicking outside
@@ -410,8 +300,26 @@ document.getElementById('factModal').addEventListener('click', function(e) {
     }
 });
 
-// Initialize particles and hearts on load
+// Keyboard support
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (document.getElementById('factModal').style.display === 'flex') {
+            closeFact();
+        }
+        if (document.getElementById('hugOverlay').classList.contains('active')) {
+            // Don't allow closing hug overlay with escape during animation
+            return;
+        }
+    }
+});
+
+// Initialize animations on page load
 window.addEventListener('load', () => {
     createParticles();
     createHearts();
+    
+    // Add a small delay to ensure everything is loaded
+    setTimeout(() => {
+        console.log('💕 Website loaded successfully! 💜');
+    }, 1000);
 });
