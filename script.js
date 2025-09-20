@@ -34,6 +34,13 @@ const herFacts = [
 ];
 
 // Facts for him
+
+/* usage
+"this is a sentence for me here",
+"this is a new sentence and fact for me",
+"this is also a new sentence and fact for me",
+"this is the last sentence and fact for me"  <- в последнем предложении не ставьте запятую в конце, а каждое предложение заключайте в кавычки.
+ */ 
 const himFacts = [
     "test",
     "test1",
@@ -61,6 +68,12 @@ const herPictures = [
     'her5.jpg'
     // Add more filenames as needed
 ];
+
+/* FOR PHOTOS
+
+применяются те же правила размещения, но не забудьте добавить точные названия изображений или изменить их здесь при загрузке.
+
+ */ 
 
 const himPictures = [
     'him1.jpg',
